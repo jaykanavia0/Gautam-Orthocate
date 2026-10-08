@@ -1,0 +1,292 @@
+@import "tailwindcss";
+
+@utility bg-gradient-conic {
+  background-image: conic-gradient(var(--conic-position), var(--tw-gradient-stops));
+}
+
+@layer theme {
+  :root {
+    --font-sans: var(--font-jakarta), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-mono: var(--font-mono-code), monospace;
+
+    /* Wolverine Worldwide Authentic Palette */
+    --color-black: #010101;
+    --color-offblack: #111111;
+    --color-white: #ffffff;
+    --color-canvas: #f8f9fa;
+    --color-card-bg: #ffffff;
+    --color-border: #e5e7eb;
+    --color-border-dark: #222222;
+    --color-gray-900: #1a1a1a;
+    --color-gray-800: #333333;
+    --color-gray-600: #666666;
+    --color-gray-400: #999999;
+    --color-gray-200: #e5e5e5;
+    --color-gray-100: #f4f4f5;
+
+    /* Subtle Surgical Accents */
+    --color-accent-blue: #0284c7;
+    --color-accent-cyan: #06b6d4;
+    --color-accent-emerald: #059669;
+
+    /* Wolverine Fluid Typography Scale */
+    --text-display-xl: clamp(3.75rem, 2.5rem + 5.5vw, 8rem);
+    --text-display-lg: clamp(2.5rem, 1.6rem + 3.8vw, 5.5rem);
+    --text-display-md: clamp(2rem, 1.25rem + 2.8vw, 4rem);
+    --text-heading-lg: clamp(1.6rem, 1.1rem + 2vw, 3rem);
+    --text-heading-md: clamp(1.25rem, 0.95rem + 1.4vw, 2.25rem);
+    --text-body-lg: clamp(1.05rem, 0.95rem + 0.5vw, 1.25rem);
+    --text-body-md: 0.9375rem;
+    --text-body-sm: 0.8125rem;
+    --text-label: 0.6875rem;
+
+    /* Animation Easing */
+    --ease-power4: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+}
+
+/* Base resets & typography */
+html {
+  scroll-behavior: smooth;
+  background-color: #ffffff;
+  color: #010101;
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  overflow-x: hidden;
+  background-color: #ffffff;
+  color: #010101;
+  min-height: 100vh;
+}
+
+::selection {
+  background-color: #010101;
+  color: #ffffff;
+}
+
+/* Wolverine-style Authentic Sliding Arrow Buttons (.c-button) */
+.c-button {
+  --button-background: #010101;
+  --button-border-color: #010101;
+  --button-text-color: #ffffff;
+  --button-hover-bg: #333333;
+  --button-hover-text: #ffffff;
+  --button-hover-border: #333333;
+  --padding-x: 24px;
+  --padding-y: 14px;
+  --button-icon-shift: 24px;
+  --transition-duration: 0.4s;
+  --ease: cubic-bezier(0.23, 1, 0.32, 1);
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--button-text-color);
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: 9999px !important;
+  border: none;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.c-button_bg {
+  position: absolute;
+  inset: 0;
+  background-color: var(--button-background);
+  border: 1px solid var(--button-border-color);
+  border-radius: 9999px;
+  transition: all var(--transition-duration) var(--ease);
+  z-index: 1;
+}
+
+.c-button_inner {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: var(--padding-y) var(--padding-x);
+  overflow: hidden;
+  transition: color var(--transition-duration) var(--ease);
+}
+
+.c-button_label {
+  display: inline-block;
+  transition: transform var(--transition-duration) var(--ease);
+  white-space: nowrap;
+}
+
+.c-button_icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition-duration) var(--ease);
+}
+
+.c-button_icon-first {
+  position: absolute;
+  transform: translateX(calc(-100% - var(--padding-x)));
+}
+
+.c-button:hover .c-button_bg {
+  background-color: var(--button-hover-bg);
+  border-color: var(--button-hover-border);
+  transform: scaleY(0.96);
+}
+
+.c-button:hover .c-button_inner {
+  color: var(--button-hover-text);
+}
+
+.c-button:hover .c-button_label {
+  transform: translateX(var(--button-icon-shift));
+}
+
+.c-button:hover .c-button_icon-first {
+  transform: translateX(0);
+}
+
+.c-button:hover .c-button_icon-last {
+  transform: translateX(calc(100% + var(--padding-x)));
+}
+
+/* Button Variants matching Wolverine Worldwide */
+.c-button.-cyan {
+  --button-background: #06b6d4;
+  --button-border-color: #00d2ff;
+  --button-text-color: #05070a;
+  --button-hover-bg: #ffffff;
+  --button-hover-text: #05070a;
+  --button-hover-border: #ffffff;
+}
+
+.c-button.-black {
+  --button-background: #010101;
+  --button-border-color: #010101;
+  --button-text-color: #ffffff;
+  --button-hover-bg: #262626;
+  --button-hover-text: #ffffff;
+  --button-hover-border: #262626;
+}
+
+.c-button.-white {
+  --button-background: #ffffff;
+  --button-border-color: #ffffff;
+  --button-text-color: #010101;
+  --button-hover-bg: #f4f4f5;
+  --button-hover-text: #010101;
+  --button-hover-border: #e5e5e5;
+}
+
+.c-button.-outline {
+  --button-background: transparent;
+  --button-border-color: #010101;
+  --button-text-color: #010101;
+  --button-hover-bg: #010101;
+  --button-hover-text: #ffffff;
+  --button-hover-border: #010101;
+}
+
+.c-button.-glass {
+  --button-background: rgba(255, 255, 255, 0.85);
+  --button-border-color: rgba(0, 0, 0, 0.08);
+  --button-text-color: #010101;
+  --button-hover-bg: #010101;
+  --button-hover-text: #ffffff;
+  --button-hover-border: #010101;
+}
+
+/* Technical Monospaced Badge */
+.w-badge {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 9999px;
+  background: #f4f4f5;
+  border: 1px solid #e5e7eb;
+  color: #4b5563;
+}
+
+.w-badge-dark {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+.w-badge-accent {
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+  color: #0369a1;
+}
+
+/* Minimalist Card System */
+.w-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 20px;
+  transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.w-card:hover {
+  border-color: #010101;
+  transform: translateY(-3px);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.08);
+}
+
+/* Marquee continuous ticker animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: 200%;
+  animation: marquee 25s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Smooth Horizontal Scroll snap container */
+.w-horizontal-scroll {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.w-horizontal-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.w-horizontal-item {
+  scroll-snap-align: start;
+  flex-shrink: 0;
+}
